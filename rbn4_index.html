@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="utf-8">
+	<title>Radio Bonne Nouvelle 99.4 FM</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	<style>
+	.bg {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		left: 0%;
+		top: 0%;
+		background: url(img/bg.jpg); 
+		background-repeat: no-repeat;
+		background-size: cover;
+
+		//overflow:hidden;
+		z-index: -200;
+
+	}
+
+	button:focus 
+	{
+		outline:0;
+	}
+	button{
+		cursor: pointer; 
+		cursor: hand; 
+	}
+
+	body{
+		margin: 0;
+		font-family: 'Lato', sans-serif;
+	}
+	/*
+	h1{
+		font-family: 'Lato, sans-serif';
+		color:#1f222e;
+		font-size: 1.4em;
+	}
+*/
+	.header{
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 10003;
+		overflow: hidden;
+	}
+	
+	.radiofooter{
+		position: fixed;
+	    display: table;
+	    margin: 0 auto;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height:100px;
+		z-index: 10001;
+		overflow: hidden;
+		background-color: rgba(0,0,0,0.7)
+	}
+
+	.radiofooter audio{
+		margin-left: 40%;
+		margin-top:30px;
+	}
+
+	#standardmenu {
+		
+		float: left;
+		position: fixed;
+		z-index: 10004;
+		width : 100%;
+		height : auto;
+		background: rgba(255,255,255,0.7);
+	}
+
+	#standardmenu a:link{
+		text-decoration: none;
+		color:#1f222e;
+	}
+
+	#radiobt,#visionbt,#sharebt,#partnersbt a:hover{
+		color:#FFF;
+		background-color: #1f222e;
+	}
+
+	#radiobt,#visionbt,#sharebt,#partnersbt {
+		display: inline-block;
+		left:0;
+		color:#1f222e;
+		background-color: rgba(255,255,255,0.8);
+		border-style: solid;
+		border-color: rgba(127,127,127,0.1);
+		border-width:0px 0px 2px 0px;
+		text-decoration: :none;
+		text-transform: uppercase;;
+		font-family: 'Lato', sans-serif;
+		text-align: center;
+		vertical-align: center;
+		margin-right: 1px;
+		padding-top:3px;
+		height:50px;
+		width:100%;
+		font-size:1.5em;
+	}
+	#radiosubmenu,#visionsubmenu,#partnerssubmenu,#sharesubmenu {
+		float:left;
+		display:none;
+	}
+
+	#radiosubmenu,#visionsubmenu,#partnerssubmenu,#sharesubmenu{
+		width: 100%;
+		left:0;
+		color:#1f222e;
+		background-color: rgba(0,176,241,0.3);
+		text-decoration: none;
+		text-transform: uppercase;
+		font-family: 'Lato', sans-serif;
+		text-align: center;
+		margin-right: 1px;
+		padding-top:3px;
+		font-size: 1em;
+	}
+
+	#prog1 a:link {color:rgb(59,115,171);} /* unvisited link */ 
+	#prog1 a:visited {color:rgb(59,115,171);} /* visited link */ 
+	#prog1 a:hover {color:rgb(179,216,244);} /* mouse over link #009999*/ 
+	#prog1 a:active {color:#ffffff;} /* selected link */ 
+
+	#prog2 a:link, #prog3 a:link, #prog4 a:link, #prog5 a:link, #prog6 a:link, #prog7 a:link {color:rgb(59,115,171);} /* unvisited link */ 
+	#prog2 a:visited, #prog3 a:visited, #prog4 a:visited, #prog5 a:visited, #prog6 a:visited, #prog7 a:visited {color:rgb(59,115,171);} /* visited link */ 
+	#prog2 a:hover, #prog3 a:hover, #prog4 a:hover, #prog5 a:hover, #prog6 a:hover, #prog7 a:hover {color:rgb(179,216,244);} /* mouse over link */ 
+	#prog2 a:active, #prog3 a:active, #prog4 a:active, #prog5 a:active, #prog6 a:active, #prog7 a:active {color:#ffffff;} /* selected link */ 
+/*rgb(59,115,171)*/
+	.program_array{
+		float:left;
+		display:inline-block;
+		margin-left: 0.3em;	
+		margin-top: 0.3em;
+	}
+
+	.subm{
+		cursor: pointer; 
+		cursor: hand; 
+		border-style: solid;
+		border-color: rgba(255,255,255,0.6);
+		border-width: 0px 0px 1px 0px;
+	}
+
+	.subm:hover{
+		background-color: rgba(0,176,241,1);
+	}
+
+	.top_img{
+		width:100%;
+		background-color: rgba(255,255,255,0.7);
+		//position: inline-block;
+
+	}
+
+	.plage_horaire{
+		background-color: rgba(0,176,241,1);
+		color:white;
+	}
+
+	.radio_btn{
+		float: right;
+		margin-right: 6%;
+		margin-top:50px;
+	}
+
+	.content{
+		width:94em;/*90%*/
+		height:auto;/*450px*/
+		margin-top: 5%;/*4em*/
+		margin-left: 2em;/*4em*/
+		/*margin-right: 2%;4em*/
+		background-color: rgba(255,255,255,0.5);
+		display: inline-block;
+	}
+
+	.newsletter_pdf_viewer{
+		margin-left: 1%;
+		margin-bottom: 1em;
+
+	}
+
+	.newsletter{
+		vertical-align: top;
+		width:60em;
+		height:420px;
+		background-color: rgba(255,255,225,1) ;
+		display: inline-block;
+		margin-left: 1%;
+		margin-top: 1em;
+	}
+
+	.news{
+		vertical-align: top;
+		width:20em;
+		height:400px;
+		background-color: rgba(255,255,225,1) ;
+		display: inline-block;
+		margin-left: 1%;
+		margin-top: 1em;
+	}
+
+	.news-title{
+		font-family: 'Lato', sans-serif;
+		color:#1f222e;
+		font-size: 1.4em;
+		padding-left: 2px;
+		padding-right: 2px;
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+		display:table;
+
+	}
+	.text{
+		vertical-align: text-top;
+		text-align:center;
+		display: inline-block;
+		height:440px;
+		width:12em;
+		overflow: scroll;
+		background-color: rgba(255,255,255,0.7);
+		}
+/* le bleu foncé est en RVB (59,115,171), il y a un bleu ciel en RVB (0,176,241) et le beu clair est en RVB (179,216,244).*/
+	.prog_cell_pair{
+		display:block;
+		font-size: 12px;
+		margin-top: 1px;
+		margin-bottom: 1px;
+		padding-top: 2px;
+		background-color: rgba(255,255,255,0.5);
+	}
+	.prog_cell_impair{
+		display:block;
+		font-size: 12px;
+		margin-top: 1px;
+		padding-top: 2px;
+		margin-bottom: 1px;
+		background-color:rgba(0,176,241,0.2);
+	}
+
+	.prog_day{
+		/*vertical-align: center;*/
+		display:block;
+		margin:1px;
+		padding-top:0.3em;
+		font-size: 16px;
+		height: 25px;
+		/*color: white;
+		background-color:rgba(0,176,241,0.8);*/
+		color:rgb(0,176,241);
+		background-color:rgba(0,176,241,0.2);
+	}
+	.prog_actual_day{
+		display:block;
+		margin:1px;
+		font-size: 20px;
+		height: 30px;
+		color: white;
+		background-color:rgb(59,115,171);
+		
+	}
+	.cell0,.cell1{
+		/*vertical-align: text-top;*/
+		float:left;
+		text-align:center;
+		display: inline-block;
+		height:360px;
+		width:12em;
+		margin-top: 30px;
+		overflow: scroll;
+		overflow-x: hidden;	
+		-ms-overflow-x: hidden;
+		margin-bottom:15em;
+	}
+
+	.entete_prog{
+		float:left;
+		text-align:center;
+		display: inline-block;
+		position: absolute;
+		z-index: 1000;
+		background-color: white;
+		width:84em;
+		height:30px;
+		margin-top:-2px;
+
+	}
+	.day_class{
+		display: inline-block;
+		width:12em;
+	}
+	.cell0{
+		background-color: rgba(255,255,255,0.7);
+	}
+
+	.cell1{
+		background-color: rgba(255,255,255,0.4);
+	}
+
+	/*INFO BULLE*/
+	a.info{
+	position:relative;
+	z-index:10002;
+	color:#000;
+	text-decoration:none
+	}
+	 
+	a.info:hover{
+	z-index:10003;
+	background-color:#FFF
+	}
+	 
+	a.info span{
+	display: none
+	}
+	 
+	a.info:hover span{
+	display:block;
+	position:absolute;
+	top:125%; left:2%; width:8em;
+	border:0px solid #666;
+	border-radius:0.5em;
+	background-color:rgba(255,255,255,0.85);
+	word-wrap : break-word;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.5);
+	/*color:#000;*/
+	text-align: left;
+	size:10px;
+	color:rgb(59,115,171);
+	padding:5px;
+	}
+
+	#standardmenu{
+		
+		display:table;
+		display:none;
+
+	}
+
+	#boutonmenu{
+		//position: fixed;
+		float: left;
+		left:0;
+		top:0;
+		//margin-top:6.5%;
+		border:0;
+		//background-color: #FFFFFF;
+		//max-width:50%;
+		font-size: 1.5em;
+		background: url(img/menu_ico.png);
+		background-repeat: no-repeat;	
+		background-size: cover;
+		width:50px;
+		height:50px;
+		//display:inline-block;
+		//vertical-align: middle;
+	}
+
+
+
+	#rp_img{
+		position: fixed;
+		left:20px;
+		bottom:5px;
+		z-index: 10002;
+	}
+
+	.logorbn{
+		background:url(img/logo.png);
+		background-repeat: no-repeat;
+		background-size: 20%;
+		height:50px;
+	}
+
+	.centeredbmp{
+		position: absolute;
+		display: table;
+		margin-left: auto;
+		margin-right: auto;
+
+	}
+
+	#button_dl{
+		display:inline;
+		margin:0px;
+		padding-top: 6px;
+		/*width:12.6em;*/
+	}
+
+
+	#logo_home{
+		cursor: pointer;
+		cursor: hand;
+	}
+	/*MENUS DU PROGRAMME*/
+	.program_menu{
+		margin-top: 2px;
+		margin-left: 5px;
+		position:absolute;
+		margin-top: 400px;
+		/*display:inline-block;*/
+	}
+	.menu_boutons{
+		display:block;
+		margin-left:16px;
+		margin-top:20px;
+		width:141px;
+		height:100%;
+		background-color: #6bb0d4;
+		/*margin-right:16px;	*/	
+	}
+	.menu_prog{
+		display: inline-block;
+		background-image:url(img/generic_menu_bg.gif);
+		background-repeat: no-repeat;
+		margin-right:15px;
+		width: 175px;
+		height:120px;
+	}
+	.btn_heure{
+		width:34px;
+		height:16px;
+		display:inline-block;
+		margin-left:1px;
+		padding:0px;
+		/*border: solid 1px transparent;*/
+		/*margin-left:1px;
+		margin-top:1px;
+		margin-right:1px;*/
+	}
+	#menu1 img:hover{
+		color:rgba(59,115,171,0.5);
+	}
+	@media screen and (max-width:540px) {
+											#rp_img {display: none;}
+											#radioPlayer{
+										    display: table;
+										   	margin: 0 auto;
+														}
+											.radiofooter audio{
+											margin-left: auto;
+											margin-right: auto;
+											margin-top:30px;
+															}
+											.content{
+													margin-left: 0em;
+													margin-top:5em;
+													width:100%;
+													margin-bottom:20em;
+												}
+											.program_array{
+												margin-left:4em;
+												margin-bottom: 20em;
+											}
+											.cell0, .cell1{
+												border-width: 1px;
+												border-style:solid;
+												border-color:rgb(59,115,171);
+												margin-right:auto;
+												float:center;
+												overflow-x: hidden;
+												-ms-overflow-x:; hidden;
+											}
+		
+										}
+	</style>
+</head>
+<body class="bg">
+	
+<div class="header">
+	
+	<div class="top_img">
+		<div onclick="masquer_div('standardmenu');">
+		<button id="boutonmenu">
+			<!-- class="logorbn"<img src="img/menu_ico.png" width="50px" height="50px" align="right" alt="NAV">onClick="navigate;"-->
+		</button>
+		</div>
+		<div id="logo_home"><img onClick="bthome();" src="img/logo.png" height="50px"></div>
+	</div>	
+	<div id="standardmenu" style="display: none;">
+		<button id="radiobt" onClick="derouler_div('radiosubmenu','radiobt');" class="MainButton";>
+			<span>radio</span>
+		</button>
+			<div id="radiosubmenu" style="display: none;" class="menu">
+				<div class="subm" onClick="openSubm('subm-radioprog','radio-programme');"><div id="radio-programme">programme</div></div>
+				<div class="subm" onClick="openSubm('subm-radioletr','radio-lettre');"><div id="radio-lettre">Lettre de nouvelles</div></div>
+       			<div class="subm"><span>Contribuez</span></div>
+       			<div class="subm"><span>Soutenez la diffusion de l'évangile</span></div>
+			</div>
+		<button id="visionbt" onClick="derouler_div('visionsubmenu','visionbt');" class="MainButton";>
+			<span>vision</span>
+		</button>
+			<div id="visionsubmenu" style="display: none;" class="menu">
+				<div class="subm"><span>Historique</span></div>
+        		<div class="subm"><span>Unité</span></div>
+       			<div class="subm"><span>Évangélisation</span></div>
+       			<div class="subm"><span>Édification</span></div>
+			</div>	
+		<button id="partnersbt" onClick="derouler_div('partnerssubmenu','partnersbt');" class="MainButton";>
+			<span>partenaires</span>
+		</button>
+			<div id="partnerssubmenu" style="display: none;" class="menu">
+				<div class="subm" onClick="openSubm('subm-partneglise','partner-eglise');"><div id="partner-eglise">Église</div></div>
+        		<div class="subm"><span>Oeuvres sociales</span></div>
+       			<div class="subm"><span>Radios Partenaires</span></div>
+       			<div class="subm"><span>Soutient USA</span></div>
+			</div>	
+		<button id="sharebt" onClick="derouler_div('sharesubmenu','sharebt');" class="MainButton";>
+			<span>partageons</span>
+		</button>
+			<div id="sharesubmenu" style="display: none;" class="menu">
+				<div class="subm"><span>Contactez-nous</span></div>
+        		<div class="subm"><span>Studio d'enregistrment</span></div>
+       			<div class="subm"><span>Événement</span></div>
+       			<div class="subm"><span>Soutener la radio</span></div>
+			</div>
+	</div>		
+</div>
+<div id="rp_img">
+	<img onClick="playRadio('http://dn10215.hostncast.net:8001/;stream.mp3');" src="img/play_radio.png">
+</div>
+<div class="radiofooter">
+	<div id="radioPlayer">
+	<audio id="radiomp" controls>
+	<source src="http://dn10215.hostncast.net:8001/;stream.mp3" type="audio/mpeg">
+	Your browser does not support the audio element.
+	</audio>
+	</div>
+</div>
+
+
+<div id="home-page">
+	<div class="content">
+		<div class="news">
+			<div class="news-title" onClick="lien('subm-partneglise','partner-eglise');">Rencontrez des chrétiens</br>près de chez vous</div>
+			<div class="centeredbmp"><img src="img/Eglise.png"></img></div>
+		</div>
+		<div class="news">
+			<span class="news-title">Recevez une bible chez vous</span>
+			<img src="img/Bible.png" width="50%"></img>
+		</div>
+		<div class="news">
+			<img src="img/Informations.png" width="50%"></img>
+		</div>
+	</div>
+</div>
+<div id="subm-radioprog" style="display: none;">
+	<div class="content">
+		<div class = "program_array">
+			<div class='entete_prog'>
+			<div id='day1' class='day_class'>Please wait...</div><div id='day2' class='day_class'>Please wait...</div><div id='day3' class='day_class'>Please wait...</div><div id='day4' class='day_class'>Please wait...</div><div id='day5' class='day_class'>Please wait...</div><div id='day6' class='day_class'>Please wait...</div><div id='day7' class='day_class'>Please wait...</div>
+		</div>
+			<div class="cell0"><span id='prog1'>Please wait...</span></div>
+			<div class="cell1"><span id='prog2'>Please wait...</span></div>
+			<div class="cell0"><span id='prog3'>Please wait...</span></div>
+			<div class="cell1"><span id='prog4'>Please wait...</span></div>
+			<div class="cell0"><span id='prog5'>Please wait...</span></div>
+			<div class="cell1"><span id='prog6'>Please wait...</span></div>
+			<div class="cell0"><span id='prog7'>Please wait...</span></div>
+		</div>
+		<div class= "program_menu">
+			<div id="menu1" class="menu_prog">
+				
+			</div>
+			<div id="menu2" class="menu_prog"></div>
+			<div id="menu3" class="menu_prog"></div>
+			<div id="menu4" class="menu_prog"></div>
+			<div id="menu5" class="menu_prog"></div>
+			<div id="menu6" class="menu_prog"></div>
+			<div id="menu7" class="menu_prog"></div>
+		</div>
+	</div>
+</div>
+<div id="subm-radioletr" style="display: none;">
+	<div class="content">
+		<div class="newsletter">Lettre de nouvelles de juin 2016<br>
+			<iframe class="newsletter_pdf_viewer" src = "/tmp/ViewerJS/#../articles/FGM_July_2016.pdf" width='98%' height='90%' allowfullscreen webkitallowfullscreen></iframe>		
+		</div>
+		
+	</div>
+</div>
+<div id="subm-partneglise" style="display: none;">
+	<div class="content">
+		<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1ouO1JruJjQB4JW_IkbcpGKhOcrg&ll=43.529582,-1.308077" width="600" height="480"></iframe><a href="https://drive.google.com/open?id=1ouO1JruJjQB4JW_IkbcpGKhOcrg" target="_blank">Voir en plein écran</a></p>
+	</div>
+</div>
+<script type="text/javascript">
+//window.location.hash = '#boutonmenu';
+window.setInterval(refreshProgram, 30000);
+var opened='home-page';
+var lastSubm='radio-programme';
+var actual_menu_horaires = [];
+var menu1_horaires = [];
+var menu2_horaires = [];
+var menu3_horaires = [];
+var menu4_horaires = [];
+var menu5_horaires = [];
+var menu6_horaires = [];
+var menu7_horaires = [];
+var conteneur_boutons = "<div class='menu_boutons'>";
+
+function playRadio(current_source){
+	//masquer_div('standardmenu');
+	var audio0 = document.getElementById('radiomp');
+	audio0.src = current_source;
+	audio0.play();
+
+}
+
+
+// AJAX ----------------------------
+function refreshProgram(){
+	//window.alert("refreshing_program");
+	var xhttp;
+	var xmldatas;
+	if (window.XMLHttpRequest) {
+	    xhttp = new XMLHttpRequest();
+	    } else {
+	    // code for IE6, IE5
+	    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	xhttp.onreadystatechange = function() {
+	 	if (xhttp.readyState == 4 && xhttp.status == 200) {
+	 		//document.getElementById("demo").innerHTML
+	    	xmldatas = xhttp.responseXML;
+	    	//window.alert('refreshing on redy state change');
+	    	var root = xmldatas.documentElement;
+	    	//alert('balies infos : ' + root.getElementsByTagName("info").length);
+	    	var programmes_cells = ['prog1', 'prog2', 'prog3','prog4', 'prog5', 'prog6', 'prog7'];
+	    	var days_cells = ['day1', 'day2', 'day3','day4', 'day5', 'day6', 'day7'];
+	    	var jours = new Array();
+	    	var days = new Array();
+	    	var infos = new Array();
+	    	actual_menu_horaires = [];
+	    	menu1_horaires = [];
+			menu2_horaires = [];
+			menu3_horaires = [];
+			menu4_horaires = [];
+			menu5_horaires = [];
+			menu6_horaires = [];
+			document.getElementById("menu1").innerHTML = "";
+			menu7_horaires = [];
+	    	var current_info;
+	    	var nb_info;
+			var current_cpt;
+			var current_node;
+			var current_day;
+			var current_data;
+			var download_url = "";
+			var hour_already_tracked = false;
+			var hour_tracked="";
+			var programmes_heures_menu =[];
+
+	    	for(nb_info=0; nb_info < root.getElementsByTagName("info").length; nb_info++){
+
+	    		document.getElementById(programmes_cells[nb_info]).innerHTML = "refreshing...";
+	    		infos.push(root.getElementsByTagName("info")[nb_info]);
+	    		current_info = infos[nb_info];
+	    		current_day = current_info.getElementsByTagName("day")[0];
+	    		current_data = "";
+	    		document.getElementById(days_cells[nb_info]).innerHTML = "<div class='prog_day'><strong>" + current_day.textContent + "</strong></div>";
+	    		if (nb_info>0) changeBG(getMenuId(nb_info+1), getMenuBg(current_day.textContent));
+	    		//var current_cpt;
+	    		//var current_node;
+	    		var tmp_menu = [menu1_horaires,menu2_horaires,menu3_horaires,menu4_horaires,menu5_horaires,menu6_horaires,menu7_horaires];
+	    		var nb_currentcpt_css = 0;
+	    		for(current_cpt=0;current_cpt<current_info.getElementsByTagName("track").length-1; current_cpt++){
+
+	    			nb_currentcpt_css ++;
+	    			current_node = current_info.getElementsByTagName("track")[current_cpt];
+	    			if (!hour_already_tracked){ // si on n'a pas d'heure de trackée 
+	    				hour_tracked = current_node.getElementsByTagName("starttime")[0].textContent.substr(0,2); // on stocke l'heure pour pouvoir la comparer
+	    				//saveHourTrackedForDay(hour_tracked, nb_info);
+	    				hour_already_tracked = true; // on met le témoin track sur true
+	    				current_data += '<div id=' + current_day.textContent+'_'+hour_tracked+' class=plage_horaire>'+ hour_tracked+ 'H00'+'</div>';// on rajoute l'heure dans la colonne
+	    				tmp_menu[nb_info].push(hour_tracked);
+	    			}
+	    			else{
+	    				// si on a déja tracké une plage horaire
+	    				// on vérifie alors qu'on change ou pas de plage en comparant hour_tracked a l'heure de la balise starttime
+	    				if (current_node.getElementsByTagName("starttime")[0].textContent.substr(0,2) != hour_tracked){
+	    				hour_tracked = current_node.getElementsByTagName("starttime")[0].textContent.substr(0,2);
+	    				//saveHourTrackedForDay(hour_tracked, nb_info);
+	    				current_data += '<div id=' + current_day.textContent+'_'+hour_tracked+' class=plage_horaire>'+ hour_tracked+ 'H00'+'</div>';// on rajoute l'heure dans la colonne
+	    				tmp_menu[nb_info].push(hour_tracked);
+	    				}
+	    			}
+	    			//saveHourTrackedForDay(hour_tracked,current_day.textContent);
+	    			download_url = '/tmp/media/' +  current_node.getElementsByTagName("link")[0].textContent;
+	    			current_data += '<div class='+ getCellCss(nb_currentcpt_css) +'><a class="info" href="#' + current_cpt + '" onClick="playRadio(\'/tmp/media/' +  current_node.getElementsByTagName("link")[0].textContent + "'" +')">' + "&#9658 " + current_node.getElementsByTagName("titre")[0].textContent + '<span>' + '<strong>Catégorie:</strong> ' + get_type(current_node.getElementsByTagName("category")[0].textContent) + '</br><strong>Artiste:</strong> ' + current_node.getElementsByTagName("artiste")[0].textContent + '</br><strong>Début:</strong> ' + current_node.getElementsByTagName("starttime")[0].textContent  + '</br><strong>Fin:</strong> ' + current_node.getElementsByTagName("endtime")[0].textContent + '</span></a>'+'</br><a href="' + download_url +'"'+' download="'+ download_url+'">' +'  <img src="img/dl2.svg" height="16px" alt="TELECHARGER"></a>'+'</div>';
+	    		}
+	    		
+	    		document.getElementById(programmes_cells[nb_info]).innerHTML = current_data;
+				setPlagesHoraires(current_day.textContent, nb_info);
+	    		
+	    	}
+			
+	    	var info = root.getElementsByTagName("info")[0];
+	    	var day = infos[0].getElementsByTagName("day")[0];
+
+	    	//days.push();
+	    	//alert("day : " + day.textContent + ", day tag : " + day.tagName);
+	    	var data1 = "";
+	    	document.getElementById(days_cells[0]).innerHTML = "<div class='prog_actual_day'><strong>" + day.textContent + "</strong></div>";
+	    	jours.push(day);
+	    	var info1list = info.childNodes;
+	    	//alert('infolist : ' + info1list.textContent +' length : ' + info1list.length); 
+	    	var cpt;
+	    	var nb_cpt_css = 0;
+	    	for (cpt=0; cpt < info1list.length-1; cpt++){
+					//console.log('cpt : ' + cpt + ', isOdd : ' + isOdd(cpt) + ', css : ' + getCellCss(cpt));
+	    		//alert("tracking nodes : " + info.childNodes[cpt].tagName + ', cpt : ' + cpt);<b>►</b>
+	    		
+	    		var cell_css = '<div class='+ getCellCss(cpt);
+	    		//console.log(cell_css);
+	    		var currentNodeName = info.childNodes[cpt].tagName;
+	    		var currentNode;
+
+
+
+	    		if (currentNodeName == "track"){
+	    			currentNode = info.childNodes[cpt];
+
+	    			if (currentNode.getElementsByTagName("starttime")[0].textContent.substr(0,2) != hour_tracked){
+	    				hour_tracked = currentNode.getElementsByTagName("starttime")[0].textContent.substr(0,2);
+	    				data1 += '<div id=' + day.textContent+'_'+hour_tracked+' class=plage_horaire>'+ hour_tracked+ 'H00'+'</div>';// on rajoute l'heure dans la colonne
+	    				actual_menu_horaires.push(hour_tracked);
+
+
+	    				}
+
+
+	    			download_url = "media/" + currentNode.getElementsByTagName("link")[0].textContent;
+	    			//console.log(cell_css +'><a href="#' + cpt + '" onClick="playRadio(\'/tmp/media/' + currentNode.getElementsByTagName("link")[0].textContent + "'" +')">' + "&#9658 "  + currentNode.getElementsByTagName("titre")[0].textContent + '</a>'+'<a href="' + download_url +'"'+' download="'+ download_url+'">' +'  ('+'\u21E9'+')'+'</a></div>');'\u21E9'
+	    			nb_cpt_css ++;
+	    			data1 += '<div class='+ getCellCss(nb_cpt_css) +'><a class="info" href="#' + cpt + '" onClick="playRadio(\'/tmp/media/' + currentNode.getElementsByTagName("link")[0].textContent + "'" +')">' + "&#9658 "  + currentNode.getElementsByTagName("titre")[0].textContent  + '<span>' + '<strong>Catégorie:</strong> ' + get_type(currentNode.getElementsByTagName("category")[0].textContent) + '</br><strong>Artiste:</strong> ' + currentNode.getElementsByTagName("artiste")[0].textContent + '</br><strong>Début:</strong> ' + currentNode.getElementsByTagName("starttime")[0].textContent  + '</br><strong>Fin:</strong> ' + currentNode.getElementsByTagName("endtime")[0].textContent + '</span></a>'+'</br><a href="' + download_url +'"'+' download="'+ download_url+'">' +'  <img src="img/dl2.svg" height="16px" alt="TELECHARGER"></a>'+'</div>';
+
+	    		}
+	    	}
+	    	
+	    	document.getElementById("prog1").innerHTML = data1;
+	    	changeBG('menu1', getMenuBg(day.textContent));
+			document.getElementById("menu1").innerHTML += conteneur_boutons + affichePlagesHoraires(actual_menu_horaires, day.textContent) + "</div>";
+		}
+	};
+	//var rand = 
+	//xhttp.load("programme.xml");
+	xhttp.open("GET", "programme.xml"+"?tt='"+Date.now()+"'", true);
+	xhttp.send();
+}
+
+
+
+//---------------------------------//
+function setPlagesHoraires(day_str, nb_cell){
+	switch (nb_cell){
+				case 1:
+					document.getElementById("menu2").innerHTML = "";
+					document.getElementById("menu2").innerHTML += conteneur_boutons + affichePlagesHoraires(menu2_horaires, day_str) + "</div>";
+				break;
+				case 2:
+					document.getElementById("menu3").innerHTML = "";
+					document.getElementById("menu3").innerHTML += conteneur_boutons + affichePlagesHoraires(menu3_horaires, day_str) + "</div>";
+				break;
+				case 3:
+					document.getElementById("menu4").innerHTML = "";
+					document.getElementById("menu4").innerHTML += conteneur_boutons + affichePlagesHoraires(menu4_horaires, day_str) + "</div>";
+				break;
+				case 4:
+					document.getElementById("menu5").innerHTML = "";
+					document.getElementById("menu5").innerHTML += conteneur_boutons + affichePlagesHoraires(menu5_horaires, day_str) + "</div>";
+				break;
+				case 5:
+					document.getElementById("menu6").innerHTML = "";
+					document.getElementById("menu6").innerHTML += conteneur_boutons + affichePlagesHoraires(menu6_horaires, day_str) + "</div>";
+				break;
+				case 6:
+					document.getElementById("menu7").innerHTML = "";
+					document.getElementById("menu7").innerHTML += conteneur_boutons + affichePlagesHoraires(menu7_horaires, day_str) + "</div>";
+				break;
+				/*case 6:
+					document.getElementById("menu1").innerHTML += conteneur_boutons + affichePlagesHoraires(menu7_horaires, day_str) + "</div>";
+				break;*/
+	    		}
+}
+
+function affichePlagesHoraires(day_array, day_str){
+	console.log("affiche" + day_array.length + '/' + day_array);
+	var htmlContent = "";
+	for (var i=0;i<day_array.length;i++){
+		htmlContent += "<div  class='btn_heure'><a href=#" + day_str + "_" +day_array[i]+"><img src='img/btn_" + day_array[i] + ".gif'</img></a></div>";
+	}
+	//day_array = new Array();
+	console.log('affiche plage horaire : ' + htmlContent)
+	return htmlContent;
+}
+
+function saveHourTrackedForDay(hour_str, day_str){
+	console.log('day_str: '+day_str);
+	switch (day_str){
+		case 0:
+			menu1_horaires.push(hour_str);
+			//console.log('day_str: '+ day_str + 'menu1_horaires : ' + menu1_horaires);
+		break;
+		case 1:
+			menu2_horaires.push(hour_str);
+			console.log('day_str: '+ day_str + 'menu1_horaires : ' + menu2_horaires);
+		break;
+		case 2:
+			menu3_horaires.push(hour_str);
+		break;
+		case 3:
+			menu4_horaires.push(hour_str);
+		break;
+		case 4:
+			menu5_horaires.push(hour_str);
+		break;
+		case 5:
+			menu6_horaires.push(hour_str);
+		break;
+		case 6:
+			menu7_horaires.push(hour_str);
+		break;
+	}
+}
+
+
+function getMenuId(iteration){
+	return "menu"+iteration;
+}
+
+function changeBG(tagName, newImageUrl)
+{
+	console.log("ChangeBG : " + tagName +" with new bg: " + newImageUrl);
+	console.log(document.getElementById( tagName ));
+	document.getElementById(tagName).style.backgroundImage= newImageUrl;
+}
+
+function getMenuBg(dayStr){
+	var imgUrl = "url(img/" + dayStr+"_bg.gif)";
+
+	return imgUrl;
+}
+
+function get_type(category_value){
+	if (category_value == 0 || category_value == "0" || category_value ==""){
+		return "<i>n-c</i>";
+	}else{
+		return category_value;
+	}
+}
+
+function isOdd(num) { return num % 2;}
+
+function getCellCss(num){
+	//console.log('getcellcss : num = ' + num);
+	if (isOdd(num)){
+		return 'prog_cell_pair';
+	}	
+	else {
+		return 'prog_cell_impair';
+	}
+}
+
+function reset_menu(){
+	    document.getElementById('radiosubmenu').style.display = 'none';
+	    document.getElementById('visionsubmenu').style.display = 'none';
+	    document.getElementById('partnerssubmenu').style.display = 'none';
+	    document.getElementById('sharesubmenu').style.display = 'none';
+		document.getElementById(lastSubm).style.background = 'rgba(0,176,241,0)';
+	    document.getElementById('radiobt').style.color = '#1f222e';
+	    document.getElementById('radiobt').style.background = 'rgba(255,255,255,0.7)';
+	    document.getElementById('visionbt').style.color = '#1f222e';
+	    document.getElementById('visionbt').style.background = 'rgba(255,255,255,0.7)';
+	    document.getElementById('sharebt').style.color = '#1f222e';
+	    document.getElementById('sharebt').style.background = 'rgba(255,255,255,0.7)';
+	    document.getElementById('partnersbt').style.color = '#1f222e';
+	    document.getElementById('partnersbt').style.background = 'rgba(255,255,255,0.7)';
+}
+
+function bthome()
+	{
+		document.getElementById(opened).style.display = "none";
+	    document.getElementById('home-page').style.display = 'inline-block';
+	    opened = 'home-page';
+	    reset_menu();
+	}
+
+function openSubm(id, upperDiv)
+	{
+		document.getElementById(lastSubm).style.background = 'rgba(0,176,241,0)';
+		document.getElementById(opened).style.display = "none";
+	    document.getElementById(id).style.display = 'inline-block';
+	    document.getElementById(upperDiv).style.background = 'rgba(0,176,241,1)';
+	    lastSubm = upperDiv;
+		masquer_div('standardmenu');
+	   	opened = id;
+	   	refreshProgram();
+
+	}
+
+	function lien(id, upperDiv)
+	{
+		document.getElementById(lastSubm).style.background = 'rgba(0,176,241,0)';
+		document.getElementById(opened).style.display = "none";
+	    document.getElementById(id).style.display = 'inline-block';
+	    document.getElementById(upperDiv).style.background = 'rgba(0,176,241,1)';
+	    lastSubm = upperDiv;
+			   	opened = id;
+	   	refreshProgram();
+
+	}
+
+function derouler_div(id, upperDiv)
+	{
+	  if (document.getElementById(id).style.display == 'none')
+	  {
+	   		var menu = document.getElementsByClassName("menu");    
+	   		var MainButton = document.getElementsByClassName("MainButton");    
+	   		var i;
+			for (i = 0; i < MainButton.length; i++) {
+   			 											menu[i].style.display = 'none';
+   			 											MainButton[i].style.color = '#1f222e';
+													}
+	       document.getElementById(id).style.display = 'inline-block';
+	       document.getElementById(upperDiv).style.color = '#00b0f1';
+	       document.getElementById(upperDiv).style.background = '#FFF';
+	  }
+	  else
+	  {
+	       document.getElementById(id).style.display = 'none';
+	       document.getElementById(upperDiv).style.color = '#1f222e';
+	       document.getElementById(upperDiv).style.background = 'rgba(255,255,255,0.7)';
+	  }
+	}
+
+
+function masquer_div(id)
+	{
+	  if (document.getElementById(id).style.display == 'none')
+	  {
+	       document.getElementById(id).style.display = 'inline-block';
+	  }
+	  else
+	  {
+	       document.getElementById(id).style.display = 'none';
+	  }
+	}
+</script>
+</body>
